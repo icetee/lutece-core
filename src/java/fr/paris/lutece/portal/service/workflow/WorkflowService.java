@@ -269,6 +269,26 @@ public final class WorkflowService
         }
     }
 
+    /**
+     * Process mass action for the given ids
+     *
+     * @param listIdResource    the id list
+     * @param strResourceType   the resource type
+     * @param nIdAction         the action id
+     * @param nExternalParentId the external parent id
+     * @param request           the request
+     * @param locale            the locale
+     * @param bIsAutomatic      true if is automatic action
+     * @param user              the authenticated user
+     */
+    public void doProcessMassAction( List<Integer> listIdResource, String strResourceType, int nIdAction, Integer nExternalParentId,
+            HttpServletRequest request, Locale locale, boolean bIsAutomatic, User user )
+    {
+            for ( Integer nIdResource : listIdResource )
+            {
+                doProcessAction( nIdResource, strResourceType, nIdAction, nExternalParentId, request, locale, bIsAutomatic, user);
+            }
+    }
 
     /**
      * returns the actions history performed on a resource
@@ -805,6 +825,26 @@ public final class WorkflowService
     public List<Action> getMassActions( int nIdWorkflow )
     {
         return isAvailable( ) ? _service.getMassActions( nIdWorkflow ) : null;
+    }
+
+    /**
+     * Get the list of mass actions from a given id workflow
+     * 
+     * @param nIdWorkflow the id workflow
+     * @param nIdState
+     * @param user
+     * @return the list of mass actions
+     */
+    public Collection<Action> getMassActions( int nIdWorkflow, int nIdState, User user )
+    {
+        if ( !isAvailable( ) )
+        {
+            return null ;
+        }
+
+        Collection<Action> listActions = _service.getMassActions( nIdWorkflow, nIdState ) ;
+        
+        return _provider.getAuthorizedActions( listActions, user );
     }
 
     /**
