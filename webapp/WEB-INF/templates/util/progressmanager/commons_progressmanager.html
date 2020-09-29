@@ -1,0 +1,18 @@
+<#-- progressBar macro
+    token : the progress Feed Token
+    interval : refresh period in milli seconds, 
+    showBar : diplay the progress bar 
+    showReport : display the message report -->
+
+<#macro progressManager token label='' id='progress-bar' barStyle='width:100%' reportStyle='width:100%' showReport=true intervalTime=2000 value=0 max=100>
+
+	<#if label!='' >
+        <label for="${id}">${label}</label>
+            </#if>
+        <progress id="${id}" max="${max}" value="${value}" style="${barStyle}" class="progressmanager" token="${token}" intervalTime=${intervalTime} showReport=${showReport?c} > ${value} /${max} </progress>
+        	
+        <#if showReport >
+	<div id="${id}-report" style="${reportStyle}" lastline=0></div>
+        </#if>
+		
+</#macro>

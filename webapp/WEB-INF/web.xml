@@ -222,6 +222,11 @@
         <servlet-name>ParserBbCodeServlet</servlet-name>
         <servlet-class>fr.paris.lutece.portal.service.editor.ParserBbcodeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>progressManagerServlet</servlet-name>
+        <servlet-class>fr.paris.lutece.portal.web.progressmanager.ProgressManagerServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>
         <url-pattern>/image</url-pattern>
@@ -237,6 +242,10 @@
     <servlet-mapping>
         <servlet-name>ParserBbCodeServlet</servlet-name>
         <url-pattern>/parser/parserBbcode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>progressManagerServlet</servlet-name>
+        <url-pattern>/servlet/progressManager/progressFeed</url-pattern>
     </servlet-mapping>
 
     <error-page>
